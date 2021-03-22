@@ -5,7 +5,7 @@ use Psr\Http\Message\ResponseInterface ;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class SearchController{
-
+    
     public function gets(ServerRequestInterface $request, ResponseInterface $response){
         try {
             $service = new \Services\SearchService; 

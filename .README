@@ -1,0 +1,5 @@
+PARA PODER CORRER LA APLICACION SE DEBERA CORRER EN UNA TERMINAL DENTRO DE LA CARPETA PUBLIC 
+QUE SE ENCUENTRA EN LA CARPETA API EL SIGUIENTE COMANDO:
+php -S localhost:8080
+
+Luego en cualquier browser entrar en localhost:8080/youtube?search=(busqueda que se quiera realizar)
