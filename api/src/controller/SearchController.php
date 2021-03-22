@@ -6,12 +6,18 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class SearchController{
     
-    public function gets(ServerRequestInterface $request, ResponseInterface $response){
+    public function info(ServerRequestInterface $request, ResponseInterface $response){
         try {
             $service = new \Services\SearchService; 
-            $result =  $service->infoRequest();
+            $result =  $service->requiredInfo();
+            if($result === []){
+                $data = array('Msg' => 'No se encontraron resultados', 'Status' => 404);
+                $response->getBody()->write(json_encode($data));
+                return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+            }
             $response->getBody()->write($result);
-            return $response->withHeader('Content-Type','application/json')->withStatus(200);
+            $response->withStatus(200);
+            return $response->withHeader('Content-Type','application/json');
 
         } catch (\Throwable $error) {
             throw $error;

@@ -50,7 +50,7 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Define app routes
 
-$app->get('/youtube', \SearchController::class . ':gets');
+$app->get('/youtube', \SearchController::class . ':info');
 
 
 

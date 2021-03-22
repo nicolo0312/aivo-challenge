@@ -4,6 +4,7 @@ use \GuzzleHttp\Client;
 
 class SearchService{
     private function getFromYoutube(){
+
         try {
             $search = $_GET['search'];
             $apiKey = 'AIzaSyC-05CpyfAygDDs78zODpUzaQoAX2DZUe4';
@@ -17,9 +18,12 @@ class SearchService{
 
     }
 
-    public function infoRequest(){
+    public function requiredInfo(){
         try {
             $data = $this->getFromYoutube();
+            if($data["pageInfo"]["totalResults"]==0){
+                return [];
+            }
             $list = [];
             for($i=0;$i<count($data['items']);$i++){
                 $info = [];
@@ -28,6 +32,8 @@ class SearchService{
                 $info["title"]= $data["items"][$i]["snippet"]["title"];
                 $info["description"]= $data["items"][$i]["snippet"]["description"];
                 $info["thumbnail"]= $data["items"][$i]["snippet"]["thumbnails"]["default"]["url"];
+                $info["extra"]["channelId"]=$data["items"][$i]["snippet"]["channelId"];
+                $info["extra"]["channelTitle"]= $data["items"][$i]["snippet"]["channelTitle"];
                 array_push($list,$info);
             }
             return json_encode($list);
